@@ -1,0 +1,19 @@
+.article {
+  width: 100%;
+  max-width: 780px;
+
+  .article-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    a {
+      color: #888;
+      text-decoration: none;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+.home {
+  width: 100%;
+  max-width: 800px;
+
+  /* width */
+  ::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border: 1px solid #444;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+
+    &:hover {
+      background: #000;
+    }
+  }
+
+  .top-articles {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+    height: 280px;
+    padding-bottom: 4px;
+
+    .top-article-item {
+      height: 100%;
+      //min-width: 300px;
+      //border: 1px solid red;
+      margin-right: 10px;
+      position: relative;
+
+      &:nth-last-child(1) {
+        margin-right: 0;
+      }
+
+      img {
+        height: 100%;
+      }
+
+      .title {
+        position: absolute;
+        height: 14px;
+        width: fit-content;
+        bottom: 0;
+        right: 0;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 10px 20px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .top-articles {
+      height: 220px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .top-articles {
+      height: 160px;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .home-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .category {
+      width: calc(100% / 3);
+      height: fit-content;
+      margin-bottom: 20px;
+      display: flex;
+
+      a {
+        text-decoration: none;
+        color: #666;
+        height: fit-content;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .category-logo {
+        background-color: #f4f4f4;
+        padding: 10px;
+        height: 100px;
+        width: 100px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          height: 70px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      .category {
+        width: calc(100% / 2);
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .category {
+        .category-logo {
+          height: 60px;
+          width: 60px;
+
+          img {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}
