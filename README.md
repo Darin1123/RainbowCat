@@ -1,70 +1,162 @@
-# Getting Started with Create React App
+# 彩虹猫 🌈🐱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 2022 年 1 月 28 日
 
-## Available Scripts
+## 简介
 
-In the project directory, you can run:
+彩虹猫是一个博客系统的前端. 这个博客系统使用 [React](https://zh-hans.reactjs.org/) 编写的. 之所以仅仅只有前端是因为有很多资源提供免费的静态部署.
 
-### `npm start`
+**使用前提**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+用户熟悉如何使用 markdown 编写文章.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 示例
 
-### `npm run build`
+您可以通过 [https://darin1123.github.io/myblog](https://darin1123.github.io/myblog) 来访问项目作者的博客.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 数据
 
-### `npm run eject`
+**1. 文章数据**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+在 /src/data/core/articles.js 中添加您的文章.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+文章数据格式
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```json
+{
+    id: '唯一的id',
+    title: '文章标题',
+    category: ``,  # 和 /src/data/core/categories 中的数据对应, 区分大小写
+    date: {
+        year: 2022,
+        month: 1,
+        day: 1 
+    },
+    peek: ``, 
+    content: ``
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+> 如何快速生成如上代码? 项目运行后, 访问 xxx/#/editor 来打开编辑页面.
 
-## Learn More
+**2. 分类数据**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+在 /src/data/core/categories.js 中添加分类
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+/src/data/coreData.js 中是一个包含了所有类别的数组. 类别为字符串类型.
 
-### Code Splitting
+**3. 图片**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+所有的图片放在 /public/img 目录下. 在文章中请使用 markdown 的图片语法.
 
-### Analyzing the Bundle Size
+具体做法如下: 假设有一张名为 happy.png 的图片, 那么在文章中应该写成
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```md
+![图片名称](img/happy.png)
+```
 
-### Making a Progressive Web App
+如果你想要显示图片页面, 在 /src/data/core/images.js 中添加图片路径 .
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+例:
 
-### Advanced Configuration
+```js
+export const IMAGES = [
+    {
+        path: `img/articleImages/`,
+        items: [`fullscreen-dock-wont-hide.png`]
+    },
+    {
+        path: 'img/homeCategories/',
+        items: [`algo.png`, `Haskell.svg`]
+    },
+    {
+        path: `img/topArticles/`,
+        items: [`jvm.jpeg`]
+    }
+];
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**页面数据**
 
-### Deployment
+*主页*
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+在 src/data/page/home.js 中, 添加数据. 例:
 
-### `npm run build` fails to minify
+```js
+// 置顶文章信息
+export const TOP_ARTICLES = [
+  {
+    id: "18f36afa-bd78-4cc7-a068-dbc21dc81d74",
+    title: "大学",
+    img: "img/topArticles/大学.png"
+  },
+];
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+// 主页展示分类信息
+export const HOME_CATEGORIES = [
+	{
+    name: 'Java',
+    img: 'img/homeCategories/java.svg'
+  },
+];
+```
+
+*关于页*
+
+```js
+export const ABOUT = "";  // 详见代码示例
+```
+
+
+
+**小结 - 数据清单**
+
+> 有 * 代表是可选项
+
+*主要数据*
+
+| 内容   | 位置                        |
+| ------ | --------------------------- |
+| 文章   | src/data/core/articles.js   |
+| 分类   | src/data/core/categories.js |
+| 图片*  | src/data/core/images.js     |
+| 主页   | src/data/page/home.js       |
+| 关于页 | src/data/page/about.js      |
+
+*其他数据 \**
+
+| 内容          | 位置                        | 说明                    |
+| ------------- | --------------------------- | ----------------------- |
+| index.html    | public/index.html           | meta-data               |
+| markdown.scss | src/data/core/categories.js | 自定义文章样式          |
+| config.js     | src/config/config.js        | 系统配置 (包含基础信息) |
+
+
+
+## 注意事项
+
+**`npm install` 报错**
+
+在进行 `npm install` 的过程中, 可能会发生错误. 这是因为 `react-lightgallery` 库的版本问题导致的. 所以在运行 `npm install` 之前, 先使用以下单独安装 `react-lightgallery`:
+
+```bash
+npm install react-lightgallery --force
+```
+
+**注意事项**
+
+在编写 markdown 文章中的代码部分时, 请将标编程语言用小写标记, 如:
+
+~~~markdown
+```java
+public class {
+    ...
+}
+```
+~~~
+
+注意这里 \`\`\` 后的 java 全部都是小写的.

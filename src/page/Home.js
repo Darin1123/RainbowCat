@@ -18,14 +18,21 @@ export function Home() {
             <div className={'full-width flex center space-between'}>
                 <h2>置顶文章</h2>
             </div>
-            <div className={'top-articles'}>
-                {TOP_ARTICLES.map((item, key) => (
-                    <Link key={key} to={`/article/${item.id}`} className={'top-article-item'}>
-                        <img alt={item.img} src={`img/topArticles/${item.img}`}/>
-                        <span className={'title'}>{item.title}</span>
-                    </Link>
-                ))}
-            </div>
+            {(TOP_ARTICLES.length > 0) && (
+                <div className={'top-articles'}>
+                    {TOP_ARTICLES.map((item, key) => (
+                        <Link key={key} to={`/article/${item.id}`} className={'top-article-item'}>
+                            <img alt={item.img} src={`img/topArticles/${item.img}`}/>
+                            <span className={'title'}>{item.title}</span>
+                        </Link>
+                    ))}
+                </div>
+            )}
+
+            {(TOP_ARTICLES.length === 0) && (
+                <div>没有置顶文章...</div>
+            )}
+
 
             <div className={'full-width flex center space-between'}>
                 <h2>最近发布</h2>
@@ -43,16 +50,25 @@ export function Home() {
                 <h2>分类</h2>
                 <Link to={'/categories'} className={'link'}>所有分类 →</Link>
             </div>
-            <div className={'home-categories'}>
-                {HOME_CATEGORIES.map((item, key) => (
-                    <div className={'category'} key={key}>
-                        <Link className={'category-logo'} to={`/category/${item.name}/page/1`}>
-                            <img alt={item.name} src={`${item.img}`}/>
-                        </Link>
-                        <Link to={`/category/${item.name}/page/1`}>{item.name}</Link>
-                    </div>
-                ))}
-            </div>
+            {(HOME_CATEGORIES.length > 0) && (
+                <div className={'home-categories'}>
+                    {HOME_CATEGORIES.map((item, key) => (
+                        <div className={'category'} key={key}>
+                            <Link className={'category-logo'} to={`/category/${item.name}/page/1`}>
+                                <img alt={item.name} src={`${item.img}`}/>
+                            </Link>
+                            <Link to={`/category/${item.name}/page/1`}>{item.name}</Link>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            {(HOME_CATEGORIES.length === 0) && (
+                <div className={'home-categories'}>
+                   没有分类...
+                </div>
+            )}
+
 
             <div className={'full-width flex center space-between'}>
                 <h2>关于我</h2>
