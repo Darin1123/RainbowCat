@@ -4,13 +4,17 @@
 
 ## 简介
 
-彩虹猫是一个博客系统的前端. 这个博客系统使用 [React](https://zh-hans.reactjs.org/) 编写的. 之所以仅仅只有前端是因为有很多资源提供免费的静态部署.
+彩虹猫是一个博客系统, 使用 [React](https://zh-hans.reactjs.org/) 编写. 
+
+博文数据直接编码在本系统中. 之所以这么做是因为有很多资源提供 **免费** 的静态部署. 例如 [Github Pages](https://pages.github.com/).
+
+当然了, 你也可给自己实现一个配套的后台系统在自己的机器上部署, 这样就不用直接通过重编码, 重新部署来更新了. 
 
 **使用前提**
 
-用户熟悉如何使用 markdown 编写文章.
+1. 用户熟悉如何使用 markdown 编写文章.
 
-
+2. 用户熟悉 React 开发.
 
 ## 示例
 
@@ -30,7 +34,7 @@
 {
     id: '唯一的id',
     title: '文章标题',
-    category: ``,  # 和 /src/data/core/categories 中的数据对应, 区分大小写
+    category: ``,  // 和 /src/data/core/categories 中的数据对应, 区分大小写
     date: {
         year: 2022,
         month: 1,
