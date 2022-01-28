@@ -16,4 +16,24 @@
       }
     }
   }
+
+  .prev-next {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      color: #000;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .prev-next {
+      flex-direction: column;
+      a {
+        color: #000;
+      }
+    }
+  }
 }

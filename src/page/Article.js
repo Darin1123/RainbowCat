@@ -19,19 +19,40 @@ import {ARTICLES} from "../data/core/articles";
 
 export function Article() {
     const {id} = useParams();
-    const result = ARTICLES.filter(item => item.id === id);
-    let article = result[0];
+
+    let article = null;
+    let prevArticle = null;
+    let nextArticle = null;
+    ARTICLES.forEach(function (item, index) {
+        if (item.id === id) {
+            article = item;
+            if (index > 0) {
+                prevArticle = {
+                    id: ARTICLES[index - 1].id,
+                    title: ARTICLES[index - 1].title
+                }
+            }
+
+            if (index < ARTICLES.length - 1) {
+                nextArticle = {
+                    id: ARTICLES[index + 1].id,
+                    title: ARTICLES[index + 1].title
+                }
+            }
+        }
+    });
 
     useEffect(() => {
-        if (article !== undefined) {
+        if (article !== null) {
             document.title = `正在阅读: ${article.title} - ${TAB_TITLE}`
         }
     }, [article]);
 
-    if (result.length !== 1) {
+    if (article === null) {
         return (
             <div className={'article'}>
-                文章加载失败.
+                <h3>出错了</h3>
+                该文章不存在...
             </div>
         );
     }
@@ -40,13 +61,15 @@ export function Article() {
         <div className={'article auto-wrap'}>
             <div className={`article-top`}>
                 <div className={'crumbs'}>
-                    {article.category !== null && <span>
-                    <Link className={'underline'} to={`/categories`}>分类</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
-                        <Link className={'underline'} to={`/category/${article.category}/page/1`}>{article.category}</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
-                </span>}
+                    {article.category !== null && (
+                        <span>
+                            <Link className={'underline'} to={`/categories`}>分类</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
+                            <Link className={'underline'} to={`/category/${article.category}/page/1`}>{article.category}</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
+                        </span>)}
+
                     <span>
-                    {article.title}
-                </span>
+                        {article.title}
+                    </span>
                 </div>
 
                 <Link to={`/edit/${article.id}`}>编辑</Link>
@@ -111,6 +134,20 @@ export function Article() {
                     rehypePlugins={[rehypeKatex, rehypeRaw]}
                 />
             </article>
+            <div className={`prev-next`}>
+                {(prevArticle !== null) && (
+                    <Link to={`/article/${prevArticle.id}`}>上一篇: {prevArticle.title}</Link>
+                )}
+                {(prevArticle === null) && (
+                    <span>没有了...</span>
+                )}
+                {(nextArticle !== null) && (
+                    <Link to={`/article/${nextArticle.id}`}>下一篇: {nextArticle.title}</Link>
+                )}
+                {(nextArticle === null) && (
+                    <span>没有了...</span>
+                )}
+            </div>
         </div>
     );
 }
