@@ -99,8 +99,6 @@ nav {
     }
   }
 
-
-
   .search {
     //width: 16px;
     cursor: pointer;
@@ -136,11 +134,9 @@ nav {
 
         .nav-items {
           display: flex;
+          width: 100%;
+          //border: 1px solid red;
           flex-direction: column;
-
-          * {
-            width: fit-content;
-          }
 
           a {
             margin-bottom: 10px;

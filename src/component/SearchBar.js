@@ -30,7 +30,6 @@ export function SearchBar(props) {
         }
         await props.setShowSearchBar(false);
         let trimmedKeyword = searchKeyword.trim().replace(/\//g, "");
-        console.log(trimmedKeyword);
         document.location.hash = `/search/${trimmedKeyword}/page/1`;
     }
 
@@ -108,9 +107,11 @@ export function SearchBar(props) {
                     </div>
                 </div>
 
-                <div className={'close'} onClick={() => props.setShowSearchBar(false)}>
-                    取消
-                </div>
+                {(props.showCancel) && (
+                    <div className={'close'} onClick={() => props.setShowSearchBar(false)}>
+                        取消
+                    </div>
+                )}
             </div>
 
             {searchKeyword.trim().length > 0 &&

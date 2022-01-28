@@ -6,7 +6,6 @@
   background-color: #fff;
   padding: 12px 10px 12px 20px;
   border: 1px solid #aaa;
-  //border: 1px solid red;
 
   .search-input-container {
     display: flex;
@@ -107,15 +106,17 @@
 
 @media only screen and (max-width: 500px) {
   .search-bar {
-    width: calc(100% - 40px);
-    //left: 20px;
-    height: 60px;
-    padding: 20px;
-    top: calc(100% + 10px);
+    position: static;
+    width: calc(100%);
+    padding: 0;
+    margin-top: 10px;
+    //border: 1px solid blue;
     border: none;
 
     .search-input-container {
       .container {
+        width: calc(100%);
+
         input {
           font-size: 16px;
         }
