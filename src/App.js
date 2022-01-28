@@ -69,7 +69,7 @@ function App() {
 
         <footer>
           <div className={'m-b-5'}>
-            Powered by <a href={'https://github.com/Darin1123/RainbowCat'}>Rainbow Cat</a>.&nbsp;
+            Powered by <a href={'https://github.com/Darin1123/RainbowCat'}>Rainbow Cat 🌈🐱</a>.&nbsp;
           </div>
           <div>Copyright © {new Date().getFullYear()} {NAME_IN_ENGLISH}. 保留所有权利.</div>
         </footer>
