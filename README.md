@@ -136,6 +136,10 @@ export const ABOUT = "";  // 详见代码示例
 | config.js     | src/config/config.js        | 系统配置 (包含基础信息) |
 
 
+## 部署
+
+部署 React App 可以查看 [这里](https://create-react-app.dev/docs/deployment/).
+
 
 ## 注意事项
 
@@ -147,7 +151,7 @@ export const ABOUT = "";  // 详见代码示例
 npm install react-lightgallery --force
 ```
 
-**注意事项**
+**代码高亮**
 
 在编写 markdown 文章中的代码部分时, 请将标编程语言用小写标记, 如:
 
