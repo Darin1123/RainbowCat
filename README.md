@@ -34,7 +34,7 @@
 {
     id: '唯一的id',
     title: '文章标题',
-    category: ``,  # 和 /src/data/core/categories 中的数据对应, 区分大小写
+    category: ``,  // 和 /src/data/core/categories 中的数据对应, 区分大小写
     date: {
         year: 2022,
         month: 1,
