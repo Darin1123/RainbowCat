@@ -123,11 +123,11 @@ export const ABOUT = "";  // 详见代码示例
 
 *主要数据*
 
-| 内容   | 位置                        |
-| ------ | --------------------------- |
+| 内容   | 位置                          |
+| ------ |-----------------------------|
 | 文章   | src/data/core/articles.js   |
 | 分类   | src/data/core/categories.js |
-| 图片*  | src/data/core/images.js     |
+| 图片*  | src/data/page/images.js     |
 | 主页   | src/data/page/home.js       |
 | 关于页 | src/data/page/about.js      |
 

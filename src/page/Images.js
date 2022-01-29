@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {MY_PASSWORD, TAB_TITLE} from "../config/config";
 import './Images.scss';
-import {IMAGES} from "../data/core/images";
+import {IMAGES} from "../data/page/images";
 import {LightgalleryItem, LightgalleryProvider} from "react-lightgallery";
 
 
