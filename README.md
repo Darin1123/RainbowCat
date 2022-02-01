@@ -21,6 +21,15 @@
 您可以通过 [https://darin1123.github.io/myblog](https://darin1123.github.io/myblog) 来访问项目作者的博客.
 
 
+## Featuring
+
+- 静态部署
+- Markdown 驱动
+- 支持数学符号
+- 编辑器
+- 图库
+- 密码保护
+- 可配置页面
 
 ## 数据
 
