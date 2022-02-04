@@ -1,6 +1,7 @@
 import {LightgalleryItem, LightgalleryProvider} from "react-lightgallery";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import {okaidia} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import {string2date} from "../util/util";
 
 
 /* 基本配置 */
@@ -11,13 +12,18 @@ export const NAME_IN_ENGLISH = `XXX`  // 英文名
 export const TAB_TITLE = `${NAME}的博客`  // 网页标签标题, 博客主页标题
 export const EMAIL = 'foo@bar.com'  // 联系方式 - 邮箱
 export const SEARCH_ARTICLE_TITLE_LENGTH = 32  // 搜索框
-export const MY_PASSWORD = `password`  // 用于进入编辑页面等直接获取 markdown 代码的页面
+export const MY_PASSWORD = ``  // 用于进入编辑页面等直接获取 markdown 代码的页面
+
+/* 其他信息 */
+// 创办日期. 格式: YYYY-MM-DD
+export const LAUNCH_DATE = string2date(`2021-01-03`);
 
 /* 页面配置 */
 export const SHOW_IMAGES = true;
 
 /* 特殊的文章规则 */
 export const CUSTOM_MARKDOWN = {
+    // p tag
     p: ({node, children}) => {
         // img tag
         if (node.children[0].tagName === "img") {
@@ -67,5 +73,5 @@ export const CUSTOM_MARKDOWN = {
                 {children}
             </code>
         )
-    }
+    },
 }

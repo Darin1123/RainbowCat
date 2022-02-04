@@ -1,20 +1,18 @@
-import IconSearch from "../icons/search";
+import IconSearch from "../../icons/search";
 import {useState} from "react";
 import $ from "jquery";
 import React, {useRef, useEffect} from "react";
-import './SearchBar.scss';
-import {SEARCH_ARTICLE_TITLE_LENGTH} from "../config/config";
-import {CATEGORIES} from "../data/core/categories";
-import {ARTICLES} from "../data/core/articles";
+import './AdminSearchBar.scss';
+import {SEARCH_ARTICLE_TITLE_LENGTH} from "../../config/config";
+import {ARTICLES} from "../../data/core/articles";
 
 
-export function SearchBar(props) {
+export function AdminSearchBar(props) {
 
     const wrapperRef = useRef(null);
     useOutsideAlerter(props, wrapperRef);
 
     const [searchKeyword, setSearchKeyword] = useState('');
-    const [foundCategories, setFoundCategories] = useState([]);
     const [foundArticles, setFoundArticles] = useState([]);
 
     async function search() {
@@ -25,7 +23,7 @@ export function SearchBar(props) {
         }
         await props.setShowSearchBar(false);
         let trimmedKeyword = searchKeyword.trim().replace(/\//g, "");
-        document.location.hash = `/search/${trimmedKeyword}/page/1`;
+        document.location.hash = `/admin/search/${trimmedKeyword}/page/1`;
     }
 
     function handleKeyDown(e) {
@@ -37,22 +35,9 @@ export function SearchBar(props) {
     function handleKeywordChange(e) {
         let keyword = e.target.value;
         setSearchKeyword(keyword);
-        searchCategory(keyword);
         searchArticle(keyword);
     }
 
-    function searchCategory(keyword) {
-        keyword = keyword.toLowerCase();
-        let foundCategories = CATEGORIES.filter(item => {
-            let lowerCaseCategory = item.toLowerCase();
-            if (lowerCaseCategory.includes(keyword)) {
-                return true;
-            }
-            return keyword.includes(lowerCaseCategory);
-        });
-
-        setFoundCategories(foundCategories);
-    }
 
     function searchArticle(keyword) {
         keyword = keyword.toLowerCase();
@@ -90,7 +75,7 @@ export function SearchBar(props) {
     }
 
     return (
-        <div className={'search-bar'} ref={wrapperRef}>
+        <div className={'admin-search-bar'} ref={wrapperRef}>
             <div className={'search-input-container'}>
                 <div className={'container'}>
                     <input id={'search-input'}
@@ -111,37 +96,20 @@ export function SearchBar(props) {
 
             {searchKeyword.trim().length > 0 &&
                 <div className={'result'}>
-                    {(foundCategories.length > 0 && (
-                        <div className={'section'}>
-                            <b>分类</b>
-                            {foundCategories.slice(0, 5).map((item, key) => (
-                                <div key={key} onClick={() => goto(`/category/${item}/page/1`)}
-                                     className={'section-item'}>
-                                    {item}
-                                </div>
-                            ))}
-                            {foundCategories.length > 5 && (
-                                <div className={'section-item'} onClick={() => goto(`/search-category/${searchKeyword}`)}>查看全部 →</div>
-                            )}
-                        </div>
-                    ))}
                     {(foundArticles.length > 0 && (
                         <div className={'section'}>
                             <b>文章</b>
                             {foundArticles.slice(0, 5).map((item, key) => (
                                 <div key={key} className={'section-item'}
-                                     onClick={() => goto(`/article/${item.id}`)}>
+                                     onClick={() => goto(`/admin/edit/${item.id}`)}>
                                     {item.title.length > SEARCH_ARTICLE_TITLE_LENGTH ? item.title.slice(0, SEARCH_ARTICLE_TITLE_LENGTH - 3) + '...' : item.title}
                                 </div>
                             ))}
                             {foundArticles.length > 5 && (
-                                <div className={'section-item'} onClick={() => goto(`/search/${searchKeyword}/page/1`)}>查看全部 →</div>
+                                <div className={'section-item'} onClick={() => goto(`/admin/search/${searchKeyword}/page/1`)}>查看全部 →</div>
                             )}
                         </div>
                     ))}
-                    {(foundCategories.length === 0 && foundArticles.length === 0) && (
-                        <div className={'italic'}>什么也没有搜到...</div>
-                    )}
                 </div>}
         </div>
     );

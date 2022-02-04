@@ -1,4 +1,4 @@
-.search-bar {
+.admin-search-bar {
   position: absolute;
   top: 100%;
   width: 400px;
@@ -82,7 +82,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .search-bar {
+  .admin-search-bar {
     width: calc(100% - 80px);
     left: 0;
     padding: 0 40px 20px 40px;
@@ -100,12 +100,11 @@
         margin-left: 20px;
       }
     }
-
   }
 }
 
-@media only screen and (max-width: 500px) {
-  .search-bar {
+@media only screen and (max-width: 600px) {
+  .admin-search-bar {
     position: static;
     width: calc(100%);
     padding: 0;

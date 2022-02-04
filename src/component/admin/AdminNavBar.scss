@@ -1,4 +1,4 @@
-nav {
+.admin-nav {
   background-color: #fff;
   padding: 20px 40px;
   position: sticky;
@@ -41,8 +41,12 @@ nav {
       a {
         color: #000;
         text-decoration: none;
+        border-bottom: 1px solid transparent;
+        padding-bottom: 2px;
+        width: fit-content;
+
         &:hover {
-          text-decoration: underline;
+          border-bottom: 1px solid #000000;
         }
       }
 
@@ -62,6 +66,10 @@ nav {
         &:nth-last-child(1) {
           margin-right: 0;
         }
+      }
+
+      .active-nav-item {
+        border-bottom: 1px solid #000000;
       }
 
       .title {
@@ -108,8 +116,8 @@ nav {
   }
 }
 
-@media screen and (max-width: 500px) {
-  nav {
+@media screen and (max-width: 600px) {
+  .admin-nav {
     padding: 20px;
 
     .menu-button {

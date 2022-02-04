@@ -1,6 +1,7 @@
-.edit {
+.edit-about {
   width: 100%;
   max-width: 800px;
+  position: relative;
 
   .edit-verify-container {
     margin: 160px 0;
@@ -41,6 +42,21 @@
   }
 
   .edit-main {
+
+    .edit-main-images-icon {
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 5px 5px 5px 2px;
+
+      svg {
+        margin-right: 5px;
+        height: 16px;
+      }
+    }
+
     .title-input {
       width: calc(100% - 10px - 2px);
       padding: 5px;

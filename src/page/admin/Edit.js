@@ -1,13 +1,16 @@
 import './Edit.scss';
 import {useEffect, useState} from "react";
-import {MY_PASSWORD, TAB_TITLE} from "../config/config";
+import {TAB_TITLE} from "../../config/config";
 import {useParams} from "react-router";
 import beautify from "json-beautify";
 import {CopyToClipboard} from "react-copy-to-clipboard/src";
-import {sleep} from "../util/util";
-import {ArticleMain} from "../component/ArticleMain";
-import {ARTICLES} from "../data/core/articles";
-import {CATEGORIES} from "../data/core/categories";
+import {sleep} from "../../util/util";
+import {ArticleMain} from "../../component/ArticleMain";
+import {ARTICLES} from "../../data/core/articles";
+import {CATEGORIES} from "../../data/core/categories";
+import IconPhoto from "../../icons/photo";
+import {Attachment} from "../../component/admin/Attachment";
+import React from "react";
 
 
 /**
@@ -19,10 +22,7 @@ export function Edit() {
 
     let {id} = useParams();
 
-    const [verified, setVerified] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [inputPassword, setInputPassword] = useState(``);
-
+    const [loadArticleFailed, setLoadArticleFailed] = useState(false);
     const [topTitle, setTopTitle] = useState(``);
 
     const [articleId, setArticleId] = useState(``);
@@ -33,34 +33,12 @@ export function Edit() {
     const [result, setResult] = useState(null);
     const [copied, setCopied] = useState(false);
     const [date, setDate] = useState(null);
-
-    function handleOnKeyDown(e) {
-        if (e.key === 'Enter') {
-            handleCheck();
-        }
-    }
-
-    function handleCheck() {
-        if (inputPassword === MY_PASSWORD) {
-            setVerified(true);
-            setArticleContent();
-        } else {
-            setErrorMessage("错误的密码 :-(");
-        }
-    }
+    const [showAttachment, setShowAttachment] = useState(false);
 
     useEffect(() => {
-        if (verified) {
-            document.title = `编辑 \`${topTitle}\` - ${TAB_TITLE}`;
-        } else {
-            document.title = `请输入密码 - ${TAB_TITLE}`;
-        }
-
-    }, [verified, topTitle]);
-
-    async function setArticleContent() {
         let filterResult = ARTICLES.filter(item => item.id === id);
         if (filterResult.length > 0) {
+            setLoadArticleFailed(false);
             let article = filterResult[0];
             setTopTitle(article.title);
             setArticleId(article.id);
@@ -69,8 +47,13 @@ export function Edit() {
             setPeek(article.peek);
             setCategory(article.category);
             setDate(article.date);
+            document.title = `后台管理 - 编辑 \`${article.title}\` - ${TAB_TITLE}`;
+        } else {
+            setLoadArticleFailed(true);
+            document.title = `后台管理 - 文章不存在 - ${TAB_TITLE}`;
         }
-    }
+
+    }, [topTitle, id]);
 
     function generateResult() {
         let data = {
@@ -85,23 +68,29 @@ export function Edit() {
     }
 
     return (<div className={'edit'}>
-            {!verified && <div className={'edit-verify-container'}>
-                <h3>输入密码</h3>
-                {errorMessage !== null && (<div className={'error-message'}>
-                        {errorMessage}
-                    </div>)}
-                <div>
-                    <input placeholder={'请输入密码'}
-                           onKeyDown={handleOnKeyDown}
-                           onChange={e => setInputPassword(e.target.value)} type={'password'}/>
-                </div>
-                <div className={'edit-verify-button'} onClick={handleCheck}>确认</div>
-            </div>}
 
-            {verified && (
-                <div className={`edit-main`}>
-                    <h2>编辑 `{topTitle}`</h2>
+        {(!loadArticleFailed && showAttachment) && (
+            <Attachment setShowAttachment={setShowAttachment}/>
+        )}
 
+        <div className={`edit-main`}>
+
+            <div className={`full-width flex center space-between`} onClick={() => setShowAttachment(!showAttachment)}>
+                <h2>{loadArticleFailed ? `无法加载文章` : `编辑 \`${topTitle}\``}</h2>
+                {(!loadArticleFailed) && (
+                    <div className={`edit-main-images-icon`}>
+                        <IconPhoto/>
+                        <span>附件库</span>
+                    </div>
+                )}
+            </div>
+
+            {(loadArticleFailed) && (
+                <div>文章不存在...</div>
+            )}
+
+            {(!loadArticleFailed) && (
+                <React.Fragment>
                     <h3>
                         第一步: 文章编辑
                     </h3>
@@ -112,7 +101,7 @@ export function Edit() {
                     <div className={'workspace'}>
                     <textarea onChange={(e) => setContent(e.target.value)}
                               value={content}
-                          placeholder={'在这里输入文章...'}/>
+                              placeholder={'在这里输入文章...'}/>
                         <ArticleMain content={content}/>
                     </div>
                     <h3>
@@ -153,22 +142,30 @@ export function Edit() {
                     <pre>
                         {beautify(result, null, 2, 100)}
                     </pre>
-                            <CopyToClipboard
-                                text={beautify(result, null, 2, 100)}
-                                onCopy={async () => {
-                                    await setCopied(false);
-                                    await sleep(60);
-                                    setCopied(true)
-                                }}>
-                                <div className={'copy-button'}>
-                                    {copied &&
-                                        <div className={'m-r-10 gray-text'}>
-                                            已复制!
-                                        </div>}
-                                    <div className={'button'} onClick={() => {}}>复制</div>
-                                </div>
-                            </CopyToClipboard>
+                            <div className={'copy-button'}>
+                                {copied &&
+                                    <div className={'m-r-10 gray-text'}>
+                                        已复制!
+                                    </div>}
+                                <CopyToClipboard
+                                    text={beautify(result, null, 2, 100)}
+                                    onCopy={async () => {
+                                        await setCopied(false);
+                                        await sleep(60);
+                                        setCopied(true)
+                                    }}>
+                                    <div className={'button'} onClick={() => {
+                                    }}>复制
+                                    </div>
+                                </CopyToClipboard>
+                            </div>
+
                         </div>}
-                </div>)}
-        </div>);
+                </React.Fragment>
+            )}
+
+        </div>
+    </div>);
 }
+
+

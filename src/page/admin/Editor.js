@@ -1,15 +1,17 @@
 import './Editor.scss';
 import {useEffect, useState} from "react";
-import '../css/markdown.scss';
-import '../css/util.scss';
+import '../../css/markdown.scss';
+import '../../css/util.scss';
 import {v4 as uuidv4} from 'uuid';
 import beautify from "json-beautify";
 import {CopyToClipboard} from "react-copy-to-clipboard/src";
-import {TAB_TITLE} from "../config/config";
+import {TAB_TITLE} from "../../config/config";
 import {useBeforeunload} from 'react-beforeunload';
-import {sleep} from "../util/util";
-import {CATEGORIES} from "../data/core/categories";
-import {ArticleMain} from "../component/ArticleMain";
+import {sleep} from "../../util/util";
+import {CATEGORIES} from "../../data/core/categories";
+import {ArticleMain} from "../../component/ArticleMain";
+import {Attachment} from "../../component/admin/Attachment";
+import IconPhoto from "../../icons/photo";
 
 
 /**
@@ -24,11 +26,12 @@ export function Editor() {
     const [peek, setPeek] = useState(null);
     const [result, setResult] = useState(null);
     const [copied, setCopied] = useState(false);
+    const [showAttachment, setShowAttachment] = useState(false);
 
     useBeforeunload(() => "确定要离开吗? 所有输入的数据将会丢失.");
 
     useEffect(() => {
-        document.title = `编辑器 - ${TAB_TITLE}`;
+        document.title = `后台管理 - 编辑器 - ${TAB_TITLE}`;
     }, []);
 
     function generateResult() {
@@ -54,7 +57,19 @@ export function Editor() {
 
     return (
         <div className={'editor'}>
-            <h2>文章编辑器</h2>
+            {(showAttachment) && (
+                <Attachment setShowAttachment={setShowAttachment}/>
+            )}
+
+            <div className={`full-width flex center space-between`} onClick={() => setShowAttachment(!showAttachment)}>
+                <h2>文章编辑器</h2>
+                <div className={`edit-main-images-icon`}>
+                    <IconPhoto/>
+                    <span>
+                        附件库
+                    </span>
+                </div>
+            </div>
             <p>
                 <b>这只是一个文章编辑工具. 不具备发布的功能.</b> 请在左侧输入 Markdown 文本, 在右侧进行预览.
             </p>
@@ -109,21 +124,23 @@ export function Editor() {
                     <pre>
                         {beautify(result, null, 2, 100)}
                     </pre>
-                    <CopyToClipboard
-                        text={beautify(result, null, 2, 100)}
-                        onCopy={async () => {
-                            await setCopied(false);
-                            await sleep(60);
-                            setCopied(true)
-                        }}>
-                        <div className={'copy-button'}>
-                            {copied &&
-                                <div className={'m-r-10 gray-text'}>
-                                    已复制!
-                                </div>}
+
+                    <div className={'copy-button'}>
+                        {copied &&
+                            <div className={'m-r-10 gray-text'}>
+                                已复制!
+                            </div>}
+                        <CopyToClipboard
+                            text={beautify(result, null, 2, 100)}
+                            onCopy={async () => {
+                                await setCopied(false);
+                                await sleep(60);
+                                setCopied(true)
+                            }}>
                             <div className={'button'} onClick={foo}>复制</div>
-                        </div>
-                    </CopyToClipboard>
+                        </CopyToClipboard>
+                    </div>
+
                 </div>}
         </div>
     );
