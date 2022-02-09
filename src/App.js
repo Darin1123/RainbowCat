@@ -27,6 +27,7 @@ import {AdminSearchResult} from "./page/admin/AdminSearchResult";
 import {ObserveDate} from "./page/admin/ObserveDate";
 import {AdminAbout} from "./page/admin/AdminAbout";
 import {AdminCategories} from "./page/admin/AdminCategories";
+import {Life} from "./page/Life";
 
 function App() {
 
@@ -35,12 +36,6 @@ function App() {
     const [authenticationErrorMessage, setAuthenticationErrorMessage] = useState(null);
 
     function authenticate() {
-        if (MY_PASSWORD === '') {
-            setAdminVerified(true);
-            document.location.hash = '/admin/dashboard';
-            return;
-        }
-
         if (adminPassword.trim().length === 0) {
             setAuthenticationErrorMessage(null);
             setAdminPassword(``);
@@ -141,6 +136,12 @@ function App() {
                                         <SingleCategory/>
                                     </Route>
                                     <Route path={'/about'}>
+                                        <About/>
+                                    </Route>
+                                    <Route path={'/life'}>
+                                        <Life/>
+                                    </Route>
+                                    <Route path={'/note/:id'}>
                                         <About/>
                                     </Route>
                                     <Route path={'/article/:id'}>

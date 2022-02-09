@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import './NavBar.scss';
 import {ARTICLES} from "../data/core/articles";
 import {CATEGORIES} from "../data/core/categories";
+import {NOTES} from "../data/core/notes";
 
 
 export default function NavBar() {
@@ -64,6 +65,12 @@ export default function NavBar() {
                                   onClick={() => setToggleMenu(false)}
                                   to={'/categories'}>
                                 分类 ({CATEGORIES.length})
+                            </Link>
+
+                            <Link className={'btn m-r-20'}
+                                  onClick={() => setToggleMenu(false)}
+                                  to={'/life'}>
+                                小记 ({NOTES.length})
                             </Link>
 
                             <Link className={'nav-main-item'}

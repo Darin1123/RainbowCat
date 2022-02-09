@@ -104,3 +104,12 @@ export function string2date(str) {
         return null;
     }
 }
+
+export function convertDateStr(str) {
+    let parts = str.split('-');
+    if (parts.length === 3) {
+        return `${parts[0]} 年 ${parts[1]} 月 ${parts[2]} 日`
+    } else {
+        return null;
+    }
+}

@@ -6,6 +6,7 @@ import {string2date} from "../util/util";
 
 /* 基本配置 */
 export const SIZE = 10  // 单页文章数量
+export const NOTE_SIZE = 15  // 单次小记数量
 export const RECENT_ARTICLE_SIZE = 5  // 最近发布文章数量
 export const NAME = 'XXX'  // 你的名字
 export const NAME_IN_ENGLISH = `XXX`  // 英文名

@@ -22,5 +22,10 @@ export const IMAGES = [
 //     {
 //         path: `img/topArticles/`,
 //         items: [`jvm.jpeg`]
+//     },
+//
+//     {
+//         path: `life`,
+//         items: []
 //     }
 // ];
