@@ -44,7 +44,8 @@ export function Article() {
 
     useEffect(() => {
         if (article !== null) {
-            document.title = `正在阅读: ${article.title} - ${TAB_TITLE}`
+            document.title = `正在阅读: ${article.title} - ${TAB_TITLE}`;
+            window.scrollTo(0, 0);
         }
     }, [article]);
 
@@ -63,16 +64,14 @@ export function Article() {
                 <div className={'crumbs'}>
                     {article.category !== null && (
                         <span>
-                            <Link className={'underline'} to={`/categories`}>分类</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
-                            <Link className={'underline'} to={`/category/${article.category}/page/1`}>{article.category}</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
+                            <Link className={'underline-link'} to={`/categories`}>分类</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
+                            <Link className={'underline-link'} to={`/category/${article.category}/page/1`}>{article.category}</Link>&nbsp;&nbsp;·&nbsp;&nbsp;
                         </span>)}
 
                     <span>
                         {article.title}
                     </span>
                 </div>
-
-                <Link to={`/edit/${article.id}`}>编辑</Link>
             </div>
             <article>
                 <h1>{article.title}</h1>
@@ -139,13 +138,13 @@ export function Article() {
                     <Link to={`/article/${prevArticle.id}`}>上一篇: {prevArticle.title}</Link>
                 )}
                 {(prevArticle === null) && (
-                    <span>没有了...</span>
+                    <span>上一篇: 没有了...</span>
                 )}
                 {(nextArticle !== null) && (
                     <Link to={`/article/${nextArticle.id}`}>下一篇: {nextArticle.title}</Link>
                 )}
                 {(nextArticle === null) && (
-                    <span>没有了...</span>
+                    <span>下一篇: 没有了...</span>
                 )}
             </div>
         </div>

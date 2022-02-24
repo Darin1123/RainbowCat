@@ -1,13 +1,13 @@
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
 import {SIZE, TAB_TITLE} from "../../config/config";
-import './ObserveDate.scss';
+import './AdminObserveDate.scss';
 import {ARTICLES} from "../../data/core/articles";
 import {compareDates, getArticleDate, string2date} from "../../util/util";
 import {AdminArticleItem} from "../../component/admin/AdminArticleItem";
 import {Pagination} from "../../component/Pagination";
 
-export function ObserveDate() {
+export function AdminObserveDate() {
 
     let {date, page} = useParams();
     page = parseInt(page);

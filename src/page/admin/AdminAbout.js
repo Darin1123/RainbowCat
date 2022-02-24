@@ -5,7 +5,7 @@ import beautify from "json-beautify";
 import {CopyToClipboard} from "react-copy-to-clipboard/src";
 import {sleep} from "../../util/util";
 import {ArticleMain} from "../../component/ArticleMain";
-import IconPhoto from "../../icons/photo";
+import IconPhoto from "../../resources/icons/photo";
 import {Attachment} from "../../component/admin/Attachment";
 import {ABOUT} from "../../data/page/about";
 

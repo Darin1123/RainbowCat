@@ -1,10 +1,11 @@
 import './Home.scss';
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
-import {EMAIL, NAME, RECENT_ARTICLE_SIZE, TAB_TITLE} from "../config/config";
+import {EMAIL, HOME_TOP_ARTICLES, NAME, RECENT_ARTICLE_SIZE, TAB_TITLE} from "../config/config";
 import {ArticleItem} from "../component/ArticleItem";
 import {HOME_CATEGORIES, TOP_ARTICLES} from "../data/page/home";
 import {ARTICLES} from "../data/core/articles";
+import {RecentYear} from "../component/RecentYear";
 
 
 export function Home() {
@@ -15,21 +16,24 @@ export function Home() {
 
     return (
         <div className={'home'}>
-            <div className={'full-width flex center space-between'}>
-                <h2>置顶文章</h2>
-            </div>
-            {(TOP_ARTICLES.length > 0) && (
+            {(HOME_TOP_ARTICLES) && (
+                <div className={'full-width flex center space-between'}>
+                    <h2>置顶文章</h2>
+                </div>
+            )}
+
+            {(HOME_TOP_ARTICLES && TOP_ARTICLES.length > 0) && (
                 <div className={'top-articles'}>
                     {TOP_ARTICLES.map((item, key) => (
                         <Link key={key} to={`/article/${item.id}`} className={'top-article-item'}>
-                            <img alt={item.img} src={`img/topArticles/${item.img}`}/>
+                            <img alt={item.img} src={`${item.img}`}/>
                             <span className={'title'}>{item.title}</span>
                         </Link>
                     ))}
                 </div>
             )}
 
-            {(TOP_ARTICLES.length === 0) && (
+            {(HOME_TOP_ARTICLES && TOP_ARTICLES.length === 0) && (
                 <div>没有置顶文章...</div>
             )}
 
@@ -45,6 +49,20 @@ export function Home() {
                 {ARTICLES.slice(0, RECENT_ARTICLE_SIZE).map((item, key) =>
                     <ArticleItem item={item} key={key}/>)}
             </div>
+
+            <div className={'full-width flex center space-between'}>
+                <h2>最近一年</h2>
+                <Link to={'/articles/1'} className={'link'}>所有文章 →</Link>
+            </div>
+            {(ARTICLES.length > 0) && (
+                <RecentYear goto={'/date/'}/>
+            )}
+            {(ARTICLES.length === 0) && (
+                <div>没有文章...</div>
+            )}
+
+
+
 
             <div className={'full-width flex center space-between'}>
                 <h2>分类</h2>
@@ -65,7 +83,7 @@ export function Home() {
 
             {(HOME_CATEGORIES.length === 0) && (
                 <div className={'home-categories'}>
-                   没有分类...
+                    没有分类...
                 </div>
             )}
 

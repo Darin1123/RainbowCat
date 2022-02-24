@@ -1,7 +1,7 @@
 import './EncryptPassword.scss';
 import {useEffect, useState} from "react";
-import IconEye from "../../icons/eye";
-import IconEyeOff from "../../icons/eye-off";
+import IconEye from "../../resources/icons/eye";
+import IconEyeOff from "../../resources/icons/eye-off";
 import {TAB_TITLE} from "../../config/config";
 import {sha256} from "js-sha256";
 import {sleep} from "../../util/util";

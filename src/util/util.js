@@ -65,6 +65,19 @@ export function convertMonth(month) {
     }
 }
 
+export function convertDay(day) {
+    switch (day) {
+        case 0: return '日';
+        case 1: return '一';
+        case 2: return '二';
+        case 3: return '三';
+        case 4: return '四';
+        case 5: return '五';
+        case 6: return '六';
+        default: return '~';
+    }
+}
+
 export function convertDate(date) {
     return `${date.getFullYear()} 年 ${date.getMonth() + 1} 月 ${date.getDate()} 日`;
 }

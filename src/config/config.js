@@ -13,14 +13,14 @@ export const NAME_IN_ENGLISH = `XXX`  // 英文名
 export const TAB_TITLE = `${NAME}的博客`  // 网页标签标题, 博客主页标题
 export const EMAIL = 'foo@bar.com'  // 联系方式 - 邮箱
 export const SEARCH_ARTICLE_TITLE_LENGTH = 32  // 搜索框
-export const MY_PASSWORD = ``  // 用于进入编辑页面等直接获取 markdown 代码的页面
+export const MY_PASSWORD = `5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8`  // 用于进入编辑页面等直接获取 markdown 代码的页面, 默认密码: 'password'
 
 /* 其他信息 */
 // 创办日期. 格式: YYYY-MM-DD
 export const LAUNCH_DATE = string2date(`2021-01-03`);
 
 /* 页面配置 */
-export const SHOW_IMAGES = true;
+export const HOME_TOP_ARTICLES = false;
 
 /* 特殊的文章规则 */
 export const CUSTOM_MARKDOWN = {

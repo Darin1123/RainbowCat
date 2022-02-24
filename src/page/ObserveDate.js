@@ -1,11 +1,11 @@
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
-import {SIZE, TAB_TITLE} from "../../config/config";
+import {SIZE, TAB_TITLE} from "../config/config";
 import './ObserveDate.scss';
-import {ARTICLES} from "../../data/core/articles";
-import {compareDates, getArticleDate, string2date} from "../../util/util";
-import {AdminArticleItem} from "../../component/admin/AdminArticleItem";
-import {Pagination} from "../../component/Pagination";
+import {ARTICLES} from "../data/core/articles";
+import {compareDates, getArticleDate, string2date} from "../util/util";
+import {Pagination} from "../component/Pagination";
+import {ArticleItem} from "../component/ArticleItem";
 
 export function ObserveDate() {
 
@@ -42,12 +42,12 @@ export function ObserveDate() {
             )}
 
             {!errorOccurred && selectedArticles.map((item, key) =>
-                <AdminArticleItem key={key} item={item}/>)}
+                <ArticleItem key={key} item={item}/>)}
 
             {(!errorOccurred && selectedArticles.length > 0) && (
                 <div className={'full-width flex-column center'}>
                     <Pagination page={page}
-                                path={`/admin/date/${date}/page`}
+                                path={`/date/${date}/page`}
                                 totalPageNumber={totalPageNumber}/>
                 </div>)}
         </div>

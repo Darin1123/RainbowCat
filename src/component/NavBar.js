@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {TAB_TITLE} from "../config/config";
 import $ from "jquery";
 import {SearchBar} from "./SearchBar";
@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import './NavBar.scss';
 import {ARTICLES} from "../data/core/articles";
 import {CATEGORIES} from "../data/core/categories";
-import {NOTES} from "../data/core/notes";
+import {MOMENTS} from "../data/core/moments";
 
 
 export default function NavBar() {
@@ -56,26 +56,29 @@ export default function NavBar() {
                             {TAB_TITLE}
                         </Link>
                         <div className={'nav-items'}>
-                            <Link className={'btn m-r-20'}
+                            <NavLink className={'btn m-r-20'}
+                                     activeClassName={'active-nav-item'}
                                   onClick={() => setToggleMenu(false)}
                                   to={'/articles/1'}>
                                 所有文章 ({ARTICLES.length})
-                            </Link>
-                            <Link className={'btn m-r-20'}
+                            </NavLink>
+                            <NavLink className={'btn m-r-20'}
+                                     activeClassName={'active-nav-item'}
                                   onClick={() => setToggleMenu(false)}
                                   to={'/categories'}>
                                 分类 ({CATEGORIES.length})
-                            </Link>
+                            </NavLink>
 
-                            <Link className={'btn m-r-20'}
+                            <NavLink className={'btn m-r-20'}
+                                     activeClassName={'active-nav-item'}
                                   onClick={() => setToggleMenu(false)}
-                                  to={'/life'}>
-                                小记 ({NOTES.length})
-                            </Link>
+                                  to={'/moments'}>
+                                时刻 ({MOMENTS.length})
+                            </NavLink>
 
-                            <Link className={'nav-main-item'}
+                            <NavLink activeClassName={'active-nav-item'}
                                   onClick={() => setToggleMenu(false)}
-                                  to={'/about'}>关于</Link>
+                                  to={'/about'}>关于</NavLink>
                             {/*{screenWidth <= 500 &&*/}
                             {/*<span className={'back-up-search'}*/}
                             {/*     onClick={handleOpenSearchBar}>*/}

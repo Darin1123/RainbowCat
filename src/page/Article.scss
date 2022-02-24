@@ -1,6 +1,6 @@
 .article {
   width: 100%;
-  max-width: 780px;
+  max-width: 800px;
 
   .article-top {
     display: flex;
@@ -31,6 +31,11 @@
   @media screen and (max-width: 500px) {
     .prev-next {
       flex-direction: column;
+
+      * {
+        margin-bottom: 10px;
+      }
+
       a {
         color: #000;
       }

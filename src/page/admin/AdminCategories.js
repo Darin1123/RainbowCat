@@ -5,7 +5,7 @@ import {TAB_TITLE} from "../../config/config";
 import beautify from "json-beautify";
 import {CopyToClipboard} from "react-copy-to-clipboard/src";
 import {sleep} from "../../util/util";
-import IconX from "../../icons/x";
+import IconX from "../../resources/icons/x";
 
 export function AdminCategories() {
 

@@ -28,17 +28,17 @@ export function Articles() {
         <div className={'main'}>
             {selectedArticles.map((item, key) =>
                 <ArticleItem key={key} item={item}/>)}
+
             {ARTICLES.length === 0 && (
                 <div>什么也没有...</div>
             )}
 
             {ARTICLES.length > 0 && (
-                <div className={'full-width flex-column center'}>
-                    <Pagination page={page}
-                                path={'/articles'}
-                                totalPageNumber={totalPageNumber}/>
-                </div>
-            )}
+            <div className={'full-width flex-column center'}>
+                <Pagination page={page}
+                            path={'/articles'}
+                            totalPageNumber={totalPageNumber}/>
+            </div>)}
         </div>
     );
 

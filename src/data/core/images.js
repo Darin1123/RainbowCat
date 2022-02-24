@@ -25,7 +25,7 @@ export const IMAGES = [
 //     },
 //
 //     {
-//         path: `life`,
+//         path: `img/moments/`,
 //         items: []
 //     }
 // ];

@@ -5,11 +5,13 @@ import {Link} from "react-router-dom";
 import {SIZE, TAB_TITLE} from "../config/config";
 import {Pagination} from "../component/Pagination";
 import {ARTICLES} from "../data/core/articles";
+import {CATEGORY_NETWORK} from "../data/core/categories";
 
 export function SingleCategory() {
 
     const [selectedArticles, setSelectedArticles] = useState([]);
     const [totalPageNumber, setTotalPageNumber] = useState(0);
+    const [relatedCategories, setRelatedCategories] = useState([]);
     let {category, page} = useParams();
     page = parseInt(page);
 
@@ -19,6 +21,9 @@ export function SingleCategory() {
         let articles = ARTICLES.filter(item => item.category === category);
         setSelectedArticles(articles.slice((page - 1) * SIZE, page * SIZE));
         setTotalPageNumber(Math.ceil(articles.length / SIZE));
+        if (CATEGORY_NETWORK[category] !== undefined) {
+            setRelatedCategories(CATEGORY_NETWORK[category]);
+        }
     }, [page, category]);
 
     return (
@@ -33,7 +38,7 @@ export function SingleCategory() {
                 </span>
             </div>
 
-            <h2>{category}</h2>
+            <h1>{category}</h1>
 
             {totalPageNumber === 0 &&
                 <div>
@@ -60,6 +65,17 @@ export function SingleCategory() {
                             </div>
                         </div>)}
                 </div>}
+
+            {(relatedCategories.length !== 0) && (
+                <div className={`related-categories`}>
+                    <div>相关分类: </div>
+                    {relatedCategories.map((item, key) => (
+                        <Link to={`/category/${item}/page/1`} key={key}>
+                            {item}
+                        </Link>
+                    ))}
+                </div>
+            )}
 
             {totalPageNumber > 0 &&
                 <div className={'full-width flex-column center'}>

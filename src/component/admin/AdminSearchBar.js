@@ -1,4 +1,4 @@
-import IconSearch from "../../icons/search";
+import IconSearch from "../../resources/icons/search";
 import {useState} from "react";
 import $ from "jquery";
 import React, {useRef, useEffect} from "react";

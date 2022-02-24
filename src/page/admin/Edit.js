@@ -8,7 +8,7 @@ import {sleep} from "../../util/util";
 import {ArticleMain} from "../../component/ArticleMain";
 import {ARTICLES} from "../../data/core/articles";
 import {CATEGORIES} from "../../data/core/categories";
-import IconPhoto from "../../icons/photo";
+import IconPhoto from "../../resources/icons/photo";
 import {Attachment} from "../../component/admin/Attachment";
 import React from "react";
 
@@ -75,10 +75,11 @@ export function Edit() {
 
         <div className={`edit-main`}>
 
-            <div className={`full-width flex center space-between`} onClick={() => setShowAttachment(!showAttachment)}>
+            <div className={`full-width flex center space-between`}>
                 <h2>{loadArticleFailed ? `无法加载文章` : `编辑 \`${topTitle}\``}</h2>
                 {(!loadArticleFailed) && (
-                    <div className={`edit-main-images-icon`}>
+                    <div className={`edit-main-images-icon`}
+                         onClick={() => setShowAttachment(!showAttachment)}>
                         <IconPhoto/>
                         <span>附件库</span>
                     </div>

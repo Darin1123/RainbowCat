@@ -11,7 +11,6 @@ export function Categories() {
 
     return (
         <div className={'categories'}>
-            <h2>分类</h2>
             {CATEGORIES.length === 0 && (
                 <div>没有分类...</div>
             )}

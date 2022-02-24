@@ -41,9 +41,15 @@ nav {
       a {
         color: #000;
         text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
+      }
+
+      .nav-item {
+        padding-bottom: 2px;
+        border-bottom: 1px solid transparent;
+      }
+
+      .active-nav-item {
+        border-bottom: 1px solid #000;
       }
 
       .back-up-search {
@@ -54,10 +60,17 @@ nav {
         }
       }
 
-      .nav-main-item {
+      a {
         font-size: 12px;
         margin-right: 20px;
         cursor: pointer;
+        padding-bottom: 2px;
+        width: fit-content;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
+          border-bottom: 1px solid #000;
+        }
 
         &:nth-last-child(1) {
           margin-right: 0;
@@ -143,6 +156,5 @@ nav {
         }
       }
     }
-
   }
 }

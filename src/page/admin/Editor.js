@@ -11,7 +11,7 @@ import {sleep} from "../../util/util";
 import {CATEGORIES} from "../../data/core/categories";
 import {ArticleMain} from "../../component/ArticleMain";
 import {Attachment} from "../../component/admin/Attachment";
-import IconPhoto from "../../icons/photo";
+import IconPhoto from "../../resources/icons/photo";
 
 
 /**
@@ -61,9 +61,10 @@ export function Editor() {
                 <Attachment setShowAttachment={setShowAttachment}/>
             )}
 
-            <div className={`full-width flex center space-between`} onClick={() => setShowAttachment(!showAttachment)}>
+            <div className={`full-width flex center space-between`}>
                 <h2>文章编辑器</h2>
-                <div className={`edit-main-images-icon`}>
+                <div className={`edit-main-images-icon`}
+                     onClick={() => setShowAttachment(!showAttachment)}>
                     <IconPhoto/>
                     <span>
                         附件库

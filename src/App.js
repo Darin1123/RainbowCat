@@ -16,7 +16,7 @@ import {SearchCategory} from "./page/SearchCategory";
 import {Images} from "./page/admin/Images";
 import {MY_PASSWORD, NAME_IN_ENGLISH} from "./config/config";
 import {EncryptPassword} from "./page/admin/EncryptPassword";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AdminNavBar from "./component/admin/AdminNavBar";
 import {sha256} from "js-sha256";
 import {Dashboard} from "./page/admin/Dashboard";
@@ -24,15 +24,17 @@ import {AdminPageNotFound} from "./page/admin/AdminPageNotFound";
 import {AdminArticles} from "./page/admin/AdminArticles";
 import {Edit} from "./page/admin/Edit";
 import {AdminSearchResult} from "./page/admin/AdminSearchResult";
-import {ObserveDate} from "./page/admin/ObserveDate";
+import {AdminObserveDate} from "./page/admin/AdminObserveDate";
 import {AdminAbout} from "./page/admin/AdminAbout";
 import {AdminCategories} from "./page/admin/AdminCategories";
-import {Life} from "./page/Life";
+import {Moments} from "./page/Moments";
+import {ObserveDate} from "./page/ObserveDate";
 
 function App() {
 
     const [adminVerified, setAdminVerified] = useState(false);
     const [adminPassword, setAdminPassword] = useState(``);
+    const [adminGoTo, setAdminGoTo] = useState('/admin/dashboard');
     const [authenticationErrorMessage, setAuthenticationErrorMessage] = useState(null);
 
     function authenticate() {
@@ -43,7 +45,7 @@ function App() {
         }
         if (sha256(adminPassword) === MY_PASSWORD) {
             setAdminVerified(true);
-            document.location.hash = '/admin/dashboard'
+            document.location.hash = adminGoTo;
         } else {
             setAuthenticationErrorMessage(`错误的密码`);
         }
@@ -54,6 +56,17 @@ function App() {
             authenticate();
         }
     }
+
+    useEffect(() => {
+        let hash = document.location.hash.replace('#', '');
+        if (hash.startsWith('/admin')) {
+            if (hash === '/admin' || hash === '/admin/') {
+                setAdminGoTo('/admin/dashboard');
+            } else {
+                setAdminGoTo(hash);
+            }
+        }
+    }, []);
 
     return (
         <div className="App">
@@ -84,7 +97,7 @@ function App() {
                                             <Images/>
                                         </Route>
                                         <Route path={'/admin/date/:date/page/:page'}>
-                                            <ObserveDate/>
+                                            <AdminObserveDate/>
                                         </Route>
                                         <Route path={'/admin/password'}>
                                             <EncryptPassword/>
@@ -138,8 +151,11 @@ function App() {
                                     <Route path={'/about'}>
                                         <About/>
                                     </Route>
-                                    <Route path={'/life'}>
-                                        <Life/>
+                                    <Route path={'/date/:date/page/:page'}>
+                                        <ObserveDate/>
+                                    </Route>
+                                    <Route path={'/moments'}>
+                                        <Moments/>
                                     </Route>
                                     <Route path={'/note/:id'}>
                                         <About/>

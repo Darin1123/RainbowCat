@@ -1,6 +1,6 @@
 .home {
   width: 100%;
-  max-width: 800px;
+  max-width: 920px;
 
   /* width */
   ::-webkit-scrollbar {
@@ -9,17 +9,17 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    border: 1px solid #444;
+    border: 1px solid #ccc;
     border-radius: 10px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #444;
+    background: rgb(193, 193, 193);
     border-radius: 4px;
 
     &:hover {
-      background: #000;
+      background: #888;
     }
   }
 
@@ -84,7 +84,6 @@
   .home-categories {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 
     .category {
       width: calc(100% / 3);
