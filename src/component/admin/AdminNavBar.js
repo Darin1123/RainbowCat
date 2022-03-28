@@ -1,8 +1,6 @@
 import {Link, NavLink} from "react-router-dom";
 import {useEffect, useState} from "react";
 import './AdminNavBar.scss';
-import {ARTICLES} from "../../data/core/articles";
-import {CATEGORIES} from "../../data/core/categories";
 import $ from "jquery";
 import {AdminSearchBar} from "./AdminSearchBar";
 
@@ -82,8 +80,13 @@ export default function AdminNavBar() {
                                 密码
                             </NavLink>
                             <NavLink activeClassName={`active-nav-item`}  className={'nav-main-item'}
-                                  onClick={() => setToggleMenu(false)}
-                                  to={'/admin/about'}>
+                                     onClick={() => setToggleMenu(false)}
+                                     to={'/admin/moments/1'}>
+                                时刻
+                            </NavLink>
+                            <NavLink activeClassName={`active-nav-item`}  className={'nav-main-item'}
+                                     onClick={() => setToggleMenu(false)}
+                                     to={'/admin/about'}>
                                 关于
                             </NavLink>
                             <Link className={'nav-main-item'}

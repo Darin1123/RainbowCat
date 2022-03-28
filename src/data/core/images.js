@@ -1,7 +1,23 @@
 export const IMAGES = [
     // 在这里添加数据
-];
+    {
+        path: `img/articles/`,
+        items: []
+    },
+    {
+        path: 'img/homeCategories/',
+        items: []
+    },
+    {
+        path: `img/topArticles/`,
+        items: []
+    },
 
+    {
+        path: `img/moments/`,
+        items: []
+    }
+];
 
 
 /***********/
@@ -12,7 +28,7 @@ export const IMAGES = [
 
 // export const IMAGES = [
 //     {
-//         path: `img/articleImages/`,
+//         path: `img/articles/`,
 //         items: [`fullscreen-dock-wont-hide.png`]
 //     },
 //     {

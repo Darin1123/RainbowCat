@@ -14,6 +14,8 @@ export const TAB_TITLE = `${NAME}的博客`  // 网页标签标题, 博客主页
 export const EMAIL = 'foo@bar.com'  // 联系方式 - 邮箱
 export const SEARCH_ARTICLE_TITLE_LENGTH = 32  // 搜索框
 export const MY_PASSWORD = `5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8`  // 用于进入编辑页面等直接获取 markdown 代码的页面, 默认密码: 'password'
+export const NEW_ARTICLE_RANGE = 7;  // 判定为新文章的天数范围, 被判定为新的话, 会在标题处添加 New! 标记
+export const THEME = '';  // TODO
 
 /* 其他信息 */
 // 创办日期. 格式: YYYY-MM-DD
@@ -21,6 +23,11 @@ export const LAUNCH_DATE = string2date(`2021-01-03`);
 
 /* 页面配置 */
 export const HOME_TOP_ARTICLES = false;
+export const HOME_RECENT_YEAR = false;
+
+/* Footer */
+export const HOST_NAME = 'Github Pages';
+export const HOST_LINK = 'https://pages.github.com/';
 
 /* 特殊的文章规则 */
 export const CUSTOM_MARKDOWN = {

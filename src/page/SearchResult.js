@@ -14,21 +14,24 @@ export function SearchResult(props) {
     const [total, setTotal] = useState(0);
     const [totalPageNumber, setTotalPageNumber] = useState(0);
     page = parseInt(page);
+    keyword = keyword.toLowerCase();
 
     useEffect(() => {
         document.title = `搜索 - ${keyword} - ${TAB_TITLE}`;
         let result = ARTICLES.filter(item => {
-            if (item.title.includes(keyword)) {
+            if (item.title.toLowerCase().includes(keyword)) {
                 return true;
             }
-            if (item.category !== null && item.category.includes(keyword)) {
+            if (keyword.includes(item.title.toLowerCase())) {
                 return true;
             }
-            if (keyword.includes(item.category)) {
-                return true;
-            }
-            if (keyword.includes(item.title)) {
-                return true;
+            if (item.category !== null) {
+                if (item.category.toLowerCase().includes(keyword)) {
+                    return true;
+                }
+                if (keyword.includes(item.category.toLowerCase())) {
+                    return true;
+                }
             }
             if (keyword.includes(item.date.year)) {
                 return true;
@@ -36,7 +39,6 @@ export function SearchResult(props) {
             if (item.content.includes(keyword)) {
                 return true;
             }
-
             return false;
         });
         setTotal(result.length);

@@ -140,9 +140,9 @@ export function Edit() {
                     </div>
                     {result !== null &&
                         <div className={'result'}>
-                    <pre>
-                        {beautify(result, null, 2, 100)}
-                    </pre>
+                            <pre>
+                                {beautify(result, null, 2, 100)}
+                            </pre>
                             <div className={'copy-button'}>
                                 {copied &&
                                     <div className={'m-r-10 gray-text'}>
@@ -160,7 +160,6 @@ export function Edit() {
                                     </div>
                                 </CopyToClipboard>
                             </div>
-
                         </div>}
                 </React.Fragment>
             )}

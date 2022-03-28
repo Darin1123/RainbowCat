@@ -3,6 +3,8 @@ import {TAB_TITLE} from "../../config/config";
 import './Images.scss';
 import {IMAGES} from "../../data/core/images";
 import {LightgalleryItem, LightgalleryProvider} from "react-lightgallery";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 export function Images() {
@@ -55,7 +57,11 @@ export function Images() {
                             <LightgalleryProvider>
                                 {images.map((item, key) => (
                                     <LightgalleryItem src={`${selectedPath}${item}`} key={key} group={`${selectedPath}`}>
-                                        <img key={key} src={`${selectedPath}${item}`} alt={`${selectedPath}${item}`}/>
+                                        <LazyLoadImage
+                                            key={key}
+                                            effect={'blur'}
+                                            alt={`${item}`}
+                                            src={`${selectedPath}${item}`}/>
                                     </LightgalleryItem>
                                 ))}
                             </LightgalleryProvider>

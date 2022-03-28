@@ -64,6 +64,8 @@ export function Moments() {
             setScreenWidth(window.innerWidth);
         }
 
+        window.scrollTo(0, 0);
+
         window.addEventListener('resize', changeWidth);
     }, [screenWidth])
 
@@ -96,10 +98,14 @@ export function Moments() {
                     </div>
                     <div className={'tags m-b-10'}>
                         {MOMENTS_TAGS.map((item, key) => (
-                            <span key={key} className={`m-r-5`} onClick={() => filter(item)}>
+                            <span key={key} className={`m-r-5 ` + (selectedTag === item ? "bold" : '')} onClick={() => filter(item)}>
                                 #{item}
                             </span>
                         ))}
+                        <span onClick={() => {
+                            initMoments();
+                            setSelectedTag(null);
+                        }}>重置</span>
                     </div>
 
                     <div className={`links`}>
@@ -107,7 +113,8 @@ export function Moments() {
                         <Link to={'/articles/1'}>文章</Link>&nbsp;·&nbsp;
                         <Link to={'/categories'}>分类</Link>&nbsp;·&nbsp;
                         <Link to={'/about'}>关于</Link>&nbsp;·&nbsp;
-                        <a href={'https://github.com/Darin1123/RainbowCat'}>RainbowCat</a>
+                        <a href={'https://github.com/Darin1123/RainbowCat'}
+                           target={'_blank'} rel="noreferrer">RainbowCat</a>
                     </div>
                 </div>
             )}

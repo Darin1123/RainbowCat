@@ -11,6 +11,7 @@ import IconLayoutGrid from "../../resources/icons/layout-grid";
 import IconPhoto from "../../resources/icons/photo";
 import IconLock from "../../resources/icons/lock";
 import IconMoodSmile from "../../resources/icons/mood-smile";
+import IconCamera from "../../resources/icons/camera";
 
 
 export function Dashboard() {
@@ -56,7 +57,7 @@ export function Dashboard() {
                     <RecentYear goto={'/admin/date/'}/>
                 )}
                 {(ARTICLES.length === 0) && (
-                    <div>没有文章...</div>
+                    <div className={`m-t-10`}>还没有文章...</div>
                 )}
             </div>
 
@@ -88,6 +89,13 @@ export function Dashboard() {
                         <div className={`quick-link-container`}>
                             <IconPhoto/>
                             图库
+                        </div>
+                    </Link>
+
+                    <Link to={'/admin/moments/1'} className={`quick-link`}>
+                        <div className={`quick-link-container`}>
+                            <IconCamera/>
+                            时刻
                         </div>
                     </Link>
 

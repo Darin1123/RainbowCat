@@ -2,10 +2,11 @@ import {useParams} from "react-router";
 import './SingleCategory.scss';
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {SIZE, TAB_TITLE} from "../config/config";
+import {NEW_ARTICLE_RANGE, SIZE, TAB_TITLE} from "../config/config";
 import {Pagination} from "../component/Pagination";
 import {ARTICLES} from "../data/core/articles";
 import {CATEGORY_NETWORK} from "../data/core/categories";
+import {getArticleDate} from "../util/util";
 
 export function SingleCategory() {
 
@@ -54,6 +55,9 @@ export function SingleCategory() {
                                     <Link className={'m-r-10 text-14'} to={`/article/${item.id}`}>
                                         {item.title}
                                     </Link>
+                                    {((new Date().getTime() - getArticleDate(item).getTime()) / (1000 * 3600 * 24) < NEW_ARTICLE_RANGE) && (
+                                        <span className={`new-tag`}>New!</span>
+                                    )}
                                 </div>
 
                                 <div className={'time'}>

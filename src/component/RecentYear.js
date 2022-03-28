@@ -120,7 +120,7 @@ export function RecentYear(props) {
                 <div className={`calendar-months`}>
                     {calendarMonths.map((item, key) => (
                         <div className={`calendar-month`}
-                             style={{left: key * 16}}
+                             style={{left: key * 18}}
                              key={key}>
                             {item !== -1 ? `${convertMonth(item)}月` : ``}
                         </div>

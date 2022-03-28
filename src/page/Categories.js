@@ -7,6 +7,7 @@ import {CATEGORIES} from "../data/core/categories";
 export function Categories() {
     useEffect(() => {
         document.title = `分类 - ${TAB_TITLE}`;
+        window.scrollTo(0, 0);
     }, []);
 
     return (

@@ -32,7 +32,7 @@ export function Pagination(props) {
             {page !== 1 &&
                 <Link className={'clickable'} to={`${path}/${page - 1}`}>{page - 1}</Link>}
 
-            <div className={'underline'}>{page}</div>
+            <div style={{textDecoration: 'underline'}}>{page}</div>
 
             {/* +1 */}
             {page !== totalPageNumber &&

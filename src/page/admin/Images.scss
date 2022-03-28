@@ -34,11 +34,17 @@
             margin-right: 0;
           }
 
-          img {
-            height: 160px;
+          .lazy-load-image-background {
             width: 100%;
-            object-fit: cover;
+
+            img {
+              height: 160px;
+              width: 100%;
+              object-fit: cover;
+            }
           }
+
+
 
           @media screen and (max-width: 500px) {
             img {

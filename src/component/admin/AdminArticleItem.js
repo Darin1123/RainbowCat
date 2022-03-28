@@ -4,7 +4,7 @@ import './AdminArticleItem.scss';
 export function AdminArticleItem(props) {
     let item = props.item
     return (
-        <div className={'article-item'}>
+        <div className={'admin-article-item'}>
             <div className={'flex full-width space-between'}>
                 <div className={'flex center'}>
                     <Link className={'m-r-20 text-14'} to={`/admin/edit/${item.id}`}>

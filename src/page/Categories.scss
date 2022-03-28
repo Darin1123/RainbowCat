@@ -5,13 +5,11 @@
   a {
     display: block;
     margin-bottom: 10px;
-    color: #000;
     text-decoration: none;
     border-bottom: 1px solid transparent;
 
     &:hover {
-      border-bottom: 1px solid #000;
-      width: fit-content;
+      text-decoration: underline;
     }
   }
 

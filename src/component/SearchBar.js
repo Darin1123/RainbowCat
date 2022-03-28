@@ -57,17 +57,23 @@ export function SearchBar(props) {
     function searchArticle(keyword) {
         keyword = keyword.toLowerCase();
         let foundArticles = ARTICLES.filter(item => {
+            let lowerCaseTitle = item.title.toLowerCase();
 
-            if (item.title.includes(keyword)) {
+
+            if (lowerCaseTitle.includes(keyword)) {
                 return true;
             }
-            if (item.category !== null && item.category.includes(keyword)) {
-                return true;
+            if (item.category !== null) {
+                let lowerCaseCategory = item.category.toLowerCase();
+                if (lowerCaseCategory.includes(keyword)) {
+                    return true;
+                }
+                if (keyword.includes(lowerCaseCategory)) {
+                    return true;
+                }
             }
-            if (keyword.includes(item.category)) {
-                return true;
-            }
-            if (keyword.includes(item.title)) {
+
+            if (keyword.includes(lowerCaseTitle)) {
                 return true;
             }
             if (keyword.includes(item.date.year)) {
@@ -90,7 +96,7 @@ export function SearchBar(props) {
     }
 
     return (
-        <div className={'search-bar'} ref={wrapperRef}>
+        <div className={'search-bar ' + (props.dark ? 'dark-search-bar' : '')} ref={wrapperRef}>
             <div className={'search-input-container'}>
                 <div className={'container'}>
                     <input id={'search-input'}

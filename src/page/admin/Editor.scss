@@ -1,6 +1,6 @@
 .editor {
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   position: relative;
 
   .edit-main-images-icon {
@@ -37,7 +37,7 @@
 
     textarea {
       width: calc(50% - 10px - 5px - 2px);
-      height: calc(600px - 10px);
+      height: calc(800px - 10px);
       padding: 5px;
       overflow: auto;
       resize: none;
@@ -48,7 +48,7 @@
 
     article {
       width: calc(50% - 20px - 5px - 2px);
-      height: calc(600px - 20px);
+      height: calc(800px - 20px);
       border: 1px solid #888;
       padding: 10px 10px;
       overflow: auto;

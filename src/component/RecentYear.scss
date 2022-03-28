@@ -1,3 +1,7 @@
+$day-size: 12px;
+$day-margin: 4px;
+$day-whole-size: $day-size + $day-margin + 2px;
+
 .calendar-container {
   font-size: 8px;
   overflow: auto;
@@ -6,8 +10,8 @@
   width: calc(100% - 2px);
 
   .calendar-main {
-    width: calc(20px + 5px + 16px * 53);
-    height: calc(16px * 7 + 8px + 12px);
+    width: calc(20px + 5px + #{$day-whole-size} * 53);
+    height: calc(#{$day-whole-size} * 7 + 8px + 12px);
 
     .calendar-months {
       position: relative;
@@ -23,17 +27,17 @@
     }
 
     .calendar-days {
-      width: calc(20px + 5px + 53 * 16px);
-      height: calc(16px * 7 - 4px);
+      width: calc(20px + 5px + 53 * #{$day-whole-size});
+      height: calc(#{$day-whole-size} * 7 - 4px);
       display: flex;
 
       .calendar-left {
         width: 20px;
-        height: calc(16px * 7 - 4px);
+        height: calc(#{$day-whole-size} * 7 - 4px);
         margin-right: 5px;
 
         .calendar-day {
-          height: 12px;
+          height: $day-size + 2px;
           width: 24px;
           margin-bottom: 4px;
 
@@ -44,16 +48,16 @@
       }
 
       .calendar-right {
-        width: calc(16px * 53);
-        height: calc(16px * 7 - 4px);
+        //width: calc(16px * 53);
+        height: calc(#{$day-whole-size} * 7 - 4px);
         //border: 1px solid red;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
 
         .calendar-item {
-          width: 10px;
-          height: 10px;
+          width: $day-size;
+          height: $day-size;
           border: 1px solid #000;
           margin-bottom: 4px;
           margin-right: 4px;

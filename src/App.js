@@ -14,7 +14,7 @@ import {Home} from "./page/Home";
 import NavBar from "./component/NavBar";
 import {SearchCategory} from "./page/SearchCategory";
 import {Images} from "./page/admin/Images";
-import {MY_PASSWORD, NAME_IN_ENGLISH} from "./config/config";
+import {HOST_LINK, HOST_NAME, MY_PASSWORD, NAME_IN_ENGLISH, THEME} from "./config/config";
 import {EncryptPassword} from "./page/admin/EncryptPassword";
 import React, {useEffect, useState} from "react";
 import AdminNavBar from "./component/admin/AdminNavBar";
@@ -29,6 +29,16 @@ import {AdminAbout} from "./page/admin/AdminAbout";
 import {AdminCategories} from "./page/admin/AdminCategories";
 import {Moments} from "./page/Moments";
 import {ObserveDate} from "./page/ObserveDate";
+import {AllMoments} from "./page/admin/AllMoments";
+import {EditMoment} from "./page/admin/EditMoment";
+import {AdminMoments} from "./page/admin/AdminMoments";
+import {AddMoment} from "./page/admin/AddMoment";
+import {Playground} from "./page/Playground";
+import {Archived} from "./page/Archived";
+import './css/THEME.scss';
+import {FeelingLucky} from "./page/FeelingLucky";
+import $ from 'jquery';
+import variables from "./css/export.scss";
 
 function App() {
 
@@ -36,6 +46,8 @@ function App() {
     const [adminPassword, setAdminPassword] = useState(``);
     const [adminGoTo, setAdminGoTo] = useState('/admin/dashboard');
     const [authenticationErrorMessage, setAuthenticationErrorMessage] = useState(null);
+
+    const [dark, setDark] = useState(decideDefaultDark());
 
     function authenticate() {
         if (adminPassword.trim().length === 0) {
@@ -57,8 +69,34 @@ function App() {
         }
     }
 
+    function toggleDark() {
+        setDark(!dark);
+    }
+
+    function decideDefaultDark() {
+        let now = new Date().getHours();
+        return now >= 19 || now <= 5;
+    }
+
     useEffect(() => {
+        decideDefaultDark();
         let hash = document.location.hash.replace('#', '');
+        let html = $("html");
+
+        const DARK_BG = variables.DARK_BG;
+        const DARK_TEXT_COLOR = variables.DARK_TEXT_COLOR;
+        const LIGHT_BG = variables.LIGHT_BG;
+        const LIGHT_TEXT_COLOR= variables.LIGHT_TEXT_COLOR;
+
+        if (dark) {
+            html.css("background-color", DARK_BG);
+            html.css("color", DARK_TEXT_COLOR);
+            $('html a').css("color", DARK_TEXT_COLOR);
+        } else {
+            html.css("background-color", LIGHT_BG);
+            html.css("color", LIGHT_TEXT_COLOR);
+            $('html a').css("color", LIGHT_TEXT_COLOR);
+        }
         if (hash.startsWith('/admin')) {
             if (hash === '/admin' || hash === '/admin/') {
                 setAdminGoTo('/admin/dashboard');
@@ -66,10 +104,10 @@ function App() {
                 setAdminGoTo(hash);
             }
         }
-    }, []);
+    }, [dark]);
 
     return (
-        <div className="App">
+        <div className={"App " + (dark ? 'dark' : '') + THEME}>
             <HashRouter>
                 <Switch>
                     <Route path={`/admin`}>
@@ -105,6 +143,18 @@ function App() {
                                         <Route path={'/admin/about'}>
                                             <AdminAbout/>
                                         </Route>
+                                        <Route path={'/admin/moments'}>
+                                            <AdminMoments/>
+                                        </Route>
+                                        <Route path={'/admin/all-moments/:page'}>
+                                            <AllMoments/>
+                                        </Route>
+                                        <Route path={'/admin/add-moment'}>
+                                            <AddMoment/>
+                                        </Route>
+                                        <Route path={'/admin/edit-moment/:id'}>
+                                            <EditMoment/>
+                                        </Route>
                                         <Route path={'/admin/search/:keyword/page/:page'}>
                                             <AdminSearchResult/>
                                         </Route>
@@ -133,14 +183,14 @@ function App() {
                     </Route>
                     <Route>
                         <React.Fragment>
-                            <NavBar/>
+                            <NavBar dark={dark} toggleDark={toggleDark}/>
                             <main>
                                 <Switch>
                                     <Route path={'/'} exact={true}>
-                                        <Home/>
+                                        <Home dark={dark}/>
                                     </Route>
                                     <Route path={'/articles/:page'} exact={true}>
-                                        <Articles/>
+                                        <Articles dark={dark}/>
                                     </Route>
                                     <Route path={'/categories'}>
                                         <Categories/>
@@ -160,7 +210,7 @@ function App() {
                                     <Route path={'/note/:id'}>
                                         <About/>
                                     </Route>
-                                    <Route path={'/article/:id'}>
+                                    <Route path={'/article/:id'} dark={dark}>
                                         <Article/>
                                     </Route>
                                     <Route path={'/search/:keyword/page/:page'}>
@@ -168,6 +218,21 @@ function App() {
                                     </Route>
                                     <Route path={'/search-category/:keyword'}>
                                         <SearchCategory/>
+                                    </Route>
+                                    <Route path={'/archived'}>
+                                        <Archived dark={dark}/>
+                                    </Route>
+                                    <Route path={'/feeling-lucky'}>
+                                        <FeelingLucky/>
+                                    </Route>
+                                    {/*<Route path={'/study'}>*/}
+                                    {/*    <Study/>*/}
+                                    {/*</Route>*/}
+                                    {/*<Route path={'/study-subject/:id'}>*/}
+                                    {/*    <StudySubject/>*/}
+                                    {/*</Route>*/}
+                                    <Route path={'/playground'}>
+                                        <Playground/>
                                     </Route>
                                     <Route>
                                         <PageNotFound/>
@@ -184,8 +249,7 @@ function App() {
                 <div className={'m-b-5'}>
                     Proudly powered by <a href={'https://github.com/Darin1123/RainbowCat'}>🌈🐱</a>.&nbsp;
                     由&nbsp;
-                    <a className={"text-link"}
-                       href={"https://pages.github.com/"} target="_blank" rel="noreferrer">Github Pages</a>
+                    <a href={HOST_LINK} target="_blank" rel="noreferrer">{HOST_NAME}</a>
                     &nbsp;托管.
                 </div>
                 <div>Copyright © {new Date().getFullYear()} {NAME_IN_ENGLISH}. 保留所有权利.</div>

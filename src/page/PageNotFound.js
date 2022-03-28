@@ -21,8 +21,12 @@ export function PageNotFound() {
             <div className={'links'}>
                 <Link to={'/'}>主页</Link>
                 <Link to={'/categories'}>分类</Link>
+                <Link to={'/archived'}>归档</Link>
+                <Link to={'/moments'}>时刻</Link>
+                <Link to={'/feeling-lucky'}>Feeling lucky</Link>
                 <Link to={'/about'}>关于</Link>
             </div>
         </div>
     );
 }
+
